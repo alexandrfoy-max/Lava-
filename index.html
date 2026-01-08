@@ -3,431 +3,378 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lava | Coffee Journey Experience | Tenerife</title>
+    <title>LAVA | Coffee Experience | €5 Entry | Tenerife</title>
     <style>
         :root {
-            --volcanic-black: #1A1A1A;
-            --lava-orange: #FF5A1F;
-            --coffee-brown: #4A2C2A;
-            --canvas-cream: #F8F4E9;
-            --terracotta: #B5543C;
+            --lava-red: #D84315;
+            --coffee-dark: #3E2723;
+            --warm-beige: #F5F1E6;
+            --cream: #FFF8F0;
+            --earth-brown: #8D6E63;
         }
         
         body {
-            font-family: 'Playfair Display', serif;
-            background: var(--canvas-cream);
-            color: var(--volcanic-black);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--cream);
+            color: var(--coffee-dark);
+            margin: 0;
+            line-height: 1.5;
         }
         
-        /* Journey Timeline */
-        .journey-timeline {
+        /* ОЧЕНЬ ПРОСТОЙ ХЕДЕР */
+        .simple-header {
+            background: white;
+            padding: 15px 20px;
+            border-bottom: 2px solid var(--lava-red);
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            padding: 80px 20px;
-            position: relative;
         }
         
-        .journey-step {
-            display: flex;
-            align-items: center;
-            margin: 40px 0;
-            width: 100%;
-            max-width: 900px;
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--coffee-dark);
+        }
+        
+        .logo span {
+            color: var(--lava-red);
+        }
+        
+        .header-info {
+            text-align: right;
+        }
+        
+        .price-tag {
+            background: var(--lava-red);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .hours {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        /* ГЕРОЙ - ОЧЕНЬ ПРОСТОЙ */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('hero-bg.jpg') center/cover;
+            color: white;
+        }
+        
+        .main-title {
+            font-size: 2.8rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+        
+        .main-price {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--lava-red);
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        /* ПРОСТАЯ КАРТОЧКА ПРОЦЕССА */
+        .process {
+            padding: 60px 20px;
+            background: white;
+        }
+        
+        .step {
+            max-width: 300px;
+            margin: 0 auto 40px;
+            text-align: center;
         }
         
         .step-number {
-            width: 60px;
-            height: 60px;
-            background: var(--lava-orange);
+            width: 40px;
+            height: 40px;
+            background: var(--lava-red);
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            margin: 0 auto 20px;
             font-weight: bold;
-            flex-shrink: 0;
-            margin-right: 30px;
         }
         
-        .step-content {
+        .step-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        /* ЦЕНЫ - ОЧЕНЬ ПРОСТО */
+        .pricing-simple {
+            background: var(--warm-beige);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .price-box {
+            display: inline-block;
             background: white;
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            border-left: 5px solid var(--lava-orange);
-            flex-grow: 1;
+            margin: 20px;
+            border: 2px solid var(--earth-brown);
+            min-width: 200px;
         }
         
-        /* Зональный дизайн */
-        .zone-section {
-            padding: 100px 20px;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
+        .price-amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--lava-red);
         }
         
-        .zone-1 { background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('street-counter.jpg') center/cover; color: white; }
-        .zone-2 { background: #F5F0E6; }
-        .zone-3 { background: linear-gradient(135deg, #F8F4E9 0%, #E8DFD0 100%); }
-        
-        .zone-title {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .zone-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100px;
-            height: 3px;
-            background: var(--lava-orange);
-        }
-        
-        /* Мерч-сетка */
-        .merch-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
-        }
-        
-        .merch-item {
+        /* ИНФОРМАЦИЯ */
+        .info-section {
+            padding: 40px 20px;
             background: white;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .info-box {
+            background: var(--cream);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid var(--lava-red);
+        }
+        
+        /* КАРТА */
+        .map-section {
+            padding: 40px 20px;
+            background: var(--warm-beige);
+        }
+        
+        .map-container {
+            max-width: 800px;
+            margin: 0 auto;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
         }
         
-        .merch-item:hover {
-            transform: translateY(-10px);
-        }
-        
-        /* Кофейные методы */
-        .brew-methods {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 50px 0;
-        }
-        
-        .method-card {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
+        /* ФУТЕР */
+        .footer {
+            background: var(--coffee-dark);
+            color: white;
             text-align: center;
-            border: 2px solid transparent;
-            transition: all 0.3s;
+            padding: 40px 20px;
         }
         
-        .method-card:hover {
-            border-color: var(--lava-orange);
-            box-shadow: 0 10px 30px rgba(255,90,31,0.1);
-        }
-        
-        .method-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: var(--coffee-brown);
-        }
-        
-        /* Галерея стена */
-        .gallery-wall {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        .social-icons {
+            display: flex;
+            justify-content: center;
             gap: 15px;
-            margin: 40px 0;
+            margin: 20px 0;
         }
         
-        .art-piece {
-            height: 200px;
-            background: #ddd;
-            border-radius: 5px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .art-piece img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        
-        .art-piece:hover img {
-            transform: scale(1.05);
-        }
-        
-        /* Столы на террасе */
-        .tables-layout {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(2, 1fr);
-            gap: 20px;
-            max-width: 800px;
-            margin: 50px auto;
-            position: relative;
-        }
-        
-        .table {
-            background: var(--terracotta);
-            color: white;
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
             border-radius: 50%;
-            width: 80px;
-            height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         
-        /* Volcano View */
-        .volcano-view {
-            height: 400px;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('montana-del-mojon.jpg') center/cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-align: center;
-            margin-top: 80px;
-            position: relative;
-        }
-        
-        .volcano-view h2 {
-            font-size: 3rem;
-            font-weight: 300;
-            letter-spacing: 5px;
+        /* MOBILE */
+        @media (max-width: 768px) {
+            .simple-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .main-price {
+                font-size: 3rem;
+            }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Journey Timeline -->
-    <section class="journey-timeline">
-        <h1 style="font-size: 3.5rem; margin-bottom: 60px; text-align: center;">The Coffee Journey</h1>
-        
-        <div class="journey-step">
-            <div class="step-number">1</div>
-            <div class="step-content">
-                <h3>Street Counter & Shop</h3>
-                <p>Purchase your entry ticket and receive a bag of locally sourced Canary Islands coffee beans. Browse our selection of Canarian products and exclusive Lava merchandise.</p>
-            </div>
+    <!-- СУПЕР ПРОСТОЙ ХЕДЕР -->
+    <header class="simple-header">
+        <div class="logo">LA<span>VA</span></div>
+        <div class="header-info">
+            <div class="price-tag">€5 COFFEE EXPERIENCE</div>
+            <div class="hours">Daily 9:00-15:00 • 30-60 min</div>
         </div>
-        
-        <div class="journey-step">
-            <div class="step-number">2</div>
-            <div class="step-content">
-                <h3>Coffee Utensils Museum</h3>
-                <p>Walk through our permanent exhibition showcasing the complete coffee production process – from bean cultivation to roasting. Historical and contemporary Canarian coffee culture.</p>
-            </div>
-        </div>
-        
-        <div class="journey-step">
-            <div class="step-number">3</div>
-            <div class="step-content">
-                <h3>Choose Your Brew Method</h3>
-                <p>At the final bar counter, select your preferred brewing method: Belgian siphon, Turkish sand brew, V60 pour-over, or traditional Canarian preparation.</p>
-            </div>
-        </div>
-        
-        <div class="journey-step">
-            <div class="step-number">4</div>
-            <div class="step-content">
-                <h3>Gallery Terrace & Volcano View</h3>
-                <p>Take your chosen method to our terrace with gallery wall showcasing Canarian artists (public domain). Seven intimate tables for two, each with direct view of Montana del Mojón volcano.</p>
-            </div>
+    </header>
+
+    <!-- ГЕРОЙ -->
+    <section class="hero">
+        <h1 class="main-title">Coffee Experience</h1>
+        <div class="main-price">€5</div>
+        <p class="subtitle">Pay at the door. Choose your brew method. Enjoy with volcano views.</p>
+        <div style="background: rgba(216,67,21,0.2); padding: 15px; border-radius: 10px; display: inline-block;">
+            <strong>What's included:</strong> Coffee beans + Brewing + Art gallery + Volcano view
         </div>
     </section>
-    
-    <!-- Зона 1: Уличная стойка -->
-    <section class="zone-section zone-1">
-        <div class="container" style="max-width: 1100px; margin: 0 auto;">
-            <h2 class="zone-title">Street Counter</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center;">
-                <div>
-                    <h3 style="font-size: 2rem; margin-bottom: 20px;">Entry & Beans</h3>
-                    <p>Your journey begins here. Purchase a ticket (€15) and receive:</p>
-                    <ul style="margin: 20px 0; font-size: 1.1rem;">
-                        <li>100g bag of single-origin Canary Islands coffee beans</li>
-                        <li>Access to Coffee Utensils Museum</li>
-                        <li>Choice of brewing method</li>
-                        <li>Terrace seating with gallery access</li>
-                    </ul>
-                    <button class="btn" style="background: var(--lava-orange); color: white; padding: 15px 30px; border: none; border-radius: 5px; font-size: 1.1rem; cursor: pointer;">Book Your Visit</button>
-                </div>
-                
-                <div>
-                    <h3 style="margin-bottom: 30px;">Canarian Products & Merch</h3>
-                    <div class="merch-grid">
-                        <div class="merch-item">
-                            <div style="height: 150px; background: #ddd;"></div>
-                            <div style="padding: 20px;">
-                                <h4>Lava Ceramic Mug</h4>
-                                <p>€28</p>
-                            </div>
-                        </div>
-                        <div class="merch-item">
-                            <div style="height: 150px; background: #ccc;"></div>
-                            <div style="padding: 20px;">
-                                <h4>Local Honey & Almonds</h4>
-                                <p>€14</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+    <!-- ПРОСТОЙ ПРОЦЕСС -->
+    <section class="process">
+        <h2 style="text-align: center; margin-bottom: 40px;">How It Works</h2>
+        
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
+            <div class="step">
+                <div class="step-number">1</div>
+                <img src="street-counter.jpg" alt="Street counter" class="step-image">
+                <h3>Pay €5 at Door</h3>
+                <p>Get your bag of Canarian coffee beans. Browse local products.</p>
             </div>
-        </div>
-    </section>
-    
-    <!-- Зона 2: Музей утвари -->
-    <section class="zone-section zone-2">
-        <div class="container" style="max-width: 1100px; margin: 0 auto;">
-            <h2 class="zone-title" style="color: var(--volcanic-black);">Coffee Utensils Museum</h2>
-            <p style="font-size: 1.2rem; max-width: 800px; margin-bottom: 50px;">
-                A permanent exhibition tracing coffee's journey in the Canary Islands. From traditional Guanche cultivation tools to modern roasting equipment.
-            </p>
             
-            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 50px 0;">
-                <div style="text-align: center;">
-                    <div style="font-size: 3rem; margin-bottom: 15px;">🌱</div>
-                    <h4>Cultivation</h4>
-                    <p>Traditional farming tools</p>
-                </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 3rem; margin-bottom: 15px;">☀️</div>
-                    <h4>Drying</h4>
-                    <p>Natural sun drying methods</p>
-                </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 3rem; margin-bottom: 15px;">🔥</div>
-                    <h4>Roasting</h4>
-                    <p>Historic roasters</p>
-                </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 3rem; margin-bottom: 15px;">⚗️</div>
-                    <h4>Brewing</h4>
-                    <p>Evolution of methods</p>
-                </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <img src="brew-bar.jpg" alt="Brewing bar" class="step-image">
+                <h3>Choose Brew Method</h3>
+                <p>Select: Belgian siphon, Turkish sand, V60, or Canarian style.</p>
             </div>
-        </div>
-    </section>
-    
-    <!-- Зона 3: Выбор метода -->
-    <section class="zone-section" style="padding: 100px 20px; background: white;">
-        <div class="container" style="max-width: 1100px; margin: 0 auto;">
-            <h2 class="zone-title" style="color: var(--volcanic-black);">Choose Your Brew Method</h2>
-            <p style="text-align: center; margin-bottom: 50px; font-size: 1.2rem;">
-                Select from traditional and contemporary brewing techniques
-            </p>
             
-            <div class="brew-methods">
-                <div class="method-card">
-                    <div class="method-icon">⚗️</div>
-                    <h3>Belgian Siphon</h3>
-                    <p>Theatrical vacuum brewing method from 19th century Europe. Clean, delicate flavors.</p>
-                </div>
-                
-                <div class="method-card">
-                    <div class="method-icon">🏜️</div>
-                    <h3>Turkish Sand Brew</h3>
-                    <p>Traditional method using heated sand for even temperature control. Strong, rich coffee.</p>
-                </div>
-                
-                <div class="method-card">
-                    <div class="method-icon">☕</div>
-                    <h3>V60 Pour-Over</h3>
-                    <p>Modern Japanese method emphasizing clarity and nuanced flavor profiles.</p>
-                </div>
-                
-                <div class="method-card">
-                    <div class="method-icon">🌋</div>
-                    <h3>Canarian Traditional</h3>
-                    <p>Local method using volcanic stone filters. Earthy, mineral-rich taste.</p>
-                </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <img src="gallery-terrace.jpg" alt="Gallery terrace" class="step-image">
+                <h3>Brew & Enjoy</h3>
+                <p>Make your coffee at our terrace gallery with volcano views.</p>
             </div>
         </div>
     </section>
-    
-    <!-- Зона 4: Терраса с галереей -->
-    <section class="zone-section zone-3">
-        <div class="container" style="max-width: 1100px; margin: 0 auto;">
-            <h2 class="zone-title" style="color: var(--volcanic-black);">Gallery Terrace</h2>
+
+    <!-- ПРОСТЫЕ ЦЕНЫ -->
+    <section class="pricing-simple">
+        <h2>Simple Pricing</h2>
+        <p>No hidden fees, no booking needed</p>
+        
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 30px;">
+            <div class="price-box">
+                <div class="price-amount">€5</div>
+                <div>Per Person</div>
+                <div style="font-size: 0.9rem; color: #666; margin-top: 10px;">Coffee beans included</div>
+            </div>
             
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin: 50px 0;">
-                <div>
-                    <h3 style="margin-bottom: 20px;">Canarian Art Gallery Wall</h3>
-                    <p>Featuring works from Canarian artists in public domain. Rotating exhibitions focusing on volcanic landscapes and island culture.</p>
-                    
-                    <div class="gallery-wall">
-                        <!-- Примеры артов -->
-                        <div class="art-piece"><div style="width:100%;height:100%;background:#8B7355;"></div></div>
-                        <div class="art-piece"><div style="width:100%;height:100%;background:#A0522D;"></div></div>
-                        <div class="art-piece"><div style="width:100%;height:100%;background:#D2691E;"></div></div>
-                        <div class="art-piece"><div style="width:100%;height:100%;background:#CD853F;"></div></div>
-                    </div>
-                </div>
-                
-                <div>
-                    <h3 style="margin-bottom: 20px;">Intimate Seating</h3>
-                    <p>Seven tables for two, each positioned for optimal view of both art and volcano.</p>
-                    
-                    <div class="tables-layout">
-                        <div class="table">1</div>
-                        <div class="table">2</div>
-                        <div class="table">3</div>
-                        <div class="table">4</div>
-                        <div class="table">5</div>
-                        <div class="table">6</div>
-                        <div class="table">7</div>
-                    </div>
-                    
-                    <p style="margin-top: 30px; font-style: italic;">Each table includes brewing equipment, instructions, and volcano viewing guide.</p>
-                </div>
+            <div class="price-box">
+                <div style="font-size: 0.9rem; color: #666;">Groups</div>
+                <div class="price-amount">€10</div>
+                <div>2 People</div>
+                <div style="font-size: 0.9rem; color: var(--lava-red);">Save €2 per person</div>
+            </div>
+            
+            <div class="price-box">
+                <div style="font-size: 0.9rem; color: #666;">Larger Groups</div>
+                <div>Ask about group rates</div>
+                <div style="font-size: 0.9rem; color: #666; margin-top: 10px;">Perfect for families</div>
             </div>
         </div>
     </section>
-    
-    <!-- Вид на вулкан -->
-    <section class="volcano-view">
-        <div>
-            <h2>Montaña del Mojón</h2>
-            <p style="max-width: 600px; margin: 20px auto; font-size: 1.2rem;">
-                Your coffee journey concludes with this majestic view. The volcano that shaped the land now watches over your Canarian coffee experience.
-            </p>
+
+    <!-- ПРОСТАЯ ИНФОРМАЦИЯ -->
+    <section class="info-section">
+        <div class="info-box">
+            <h3>⏱️ Duration</h3>
+            <p>The experience takes 30-60 minutes. Stay as long as you like at the terrace.</p>
+        </div>
+        
+        <div class="info-box">
+            <h3>🏺 Local Products Shop</h3>
+            <p>At the entrance: Canarian honey, almonds, ceramics, coffee merchandise.</p>
+        </div>
+        
+        <div class="info-box">
+            <h3>🎨 Art Gallery</h3>
+            <p>Terrace features rotating exhibition of Canarian artists (public domain).</p>
+        </div>
+        
+        <div class="info-box">
+            <h3>🌋 Volcano Views</h3>
+            <p>All 7 tables have direct view of Montana del Mojón volcano.</p>
+        </div>
+        
+        <div class="info-box">
+            <h3>☕ Brewing Methods</h3>
+            <p>Choose from: Belgian siphon, Turkish sand brew, V60 pour-over, Canarian traditional.</p>
         </div>
     </section>
-    
-    <!-- Бронирование -->
-    <section style="padding: 80px 20px; text-align: center;">
-        <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Ready for Your Coffee Journey?</h2>
-        <p style="font-size: 1.2rem; margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto;">
-            Limited to 14 guests per session for intimate experience. Book in advance to secure your preferred time.
+
+    <!-- КАРТА -->
+    <section class="map-section">
+        <h2 style="text-align: center; margin-bottom: 20px;">Find Us</h2>
+        <div class="map-container">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3510.998!2d-16.723!3d28.105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xc6a44d8d6e7f2ed%3A0x1a035dc7c44c6c8a!2sCalle%20Volc%C3%A1n%2015%2C%2038502%20Santa%20Cruz%20de%20Tenerife%2C%20Spain!5e0!3m2!1sen!2ses!4v1700000000000"
+                width="100%" 
+                height="300" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy">
+            </iframe>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <p><strong>Calle Volcán 15, Santa Cruz de Tenerife</strong></p>
+            <p>📅 Open daily 9:00 - 15:00</p>
+            <p>⏱️ Experience: 30-60 minutes</p>
+            <p>💰 €5 per person at the door</p>
+        </div>
+    </section>
+
+    <!-- ФУТЕР -->
+    <footer class="footer">
+        <div class="logo" style="color: white; margin-bottom: 20px;">LA<span style="color: var(--lava-red);">VA</span></div>
+        <p>Coffee Experience & Art Gallery</p>
+        
+        <div class="social-icons">
+            <a href="#" class="social-icon">📱</a>
+            <a href="#" class="social-icon">📸</a>
+            <a href="#" class="social-icon">📍</a>
+        </div>
+        
+        <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 30px;">
+            Walk in any day 9:00-15:00 • €5 coffee experience<br>
+            Last update: March 2024
         </p>
+    </footer>
+
+    <script>
+        // Простой скрипт для статуса "открыто/закрыто"
+        function updateOpenStatus() {
+            const now = new Date();
+            const hour = now.getHours();
+            const elem = document.querySelector('.hours');
+            
+            if (elem && hour >= 9 && hour < 15) {
+                elem.innerHTML = 'OPEN NOW • Daily 9:00-15:00 • 30-60 min';
+                elem.style.color = '#4CAF50';
+                elem.style.fontWeight = 'bold';
+            }
+        }
         
-        <div style="display: inline-flex; gap: 20px; margin-bottom: 50px;">
-            <div style="text-align: center;">
-                <div style="font-size: 2rem; color: var(--lava-orange);">€15</div>
-                <div>Basic Journey</div>
-            </div>
-            <div style="text-align: center;">
-                <div style="font-size: 2rem; color: var(--lava-orange);">€25</div>
-                <div>With Pastry</div>
-            </div>
-            <div style="text-align: center;">
-                <div style="font-size: 2rem; color: var(--lava-orange);">€35</div>
-                <div>Premium Experience</div>
-            </div>
-        </div>
-        
-        <button style="background: var(--volcanic-black); color: white; padding: 18px 40px; border: none; border-radius: 5px; font-size: 1.2rem; cursor: pointer; display: inline-flex; align-items: center; gap: 10px;">
-            🗓️ Book Your Coffee Journey
-        </button>
-    </section>
+        updateOpenStatus();
+    </script>
 </body>
 </html>
