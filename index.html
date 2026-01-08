@@ -6,11 +6,15 @@
     <title>LAVA | Coffee Ritual at the Volcano | Tenerife</title>
     <style>
         :root {
-            --volcanic-black: #0A0A0A;
-            --lava-glow: #FF3B00;
-            --coffee-ground: #2C1810;
-            --canvas: #FFF5E6;
-            --stone: #3A3A3A;
+            /* НОВАЯ ПАЛИТРА: кофейно-песочная с вулканическими акцентами */
+            --sand-light: #F8F4E9;
+            --sand-medium: #E8DFCA;
+            --sand-dark: #D4C9B8;
+            --coffee-brown: #6F4E37;
+            --coffee-dark: #4A2C2A;
+            --volcanic-red: #B5543C;  /* акцент вместо оранжевого */
+            --volcanic-black: #2D2D2A;
+            --canvas: #FFFCF5;
         }
         
         * {
@@ -24,26 +28,26 @@
         }
         
         body {
-            font-family: 'Times New Roman', Times, serif;
-            background: var(--volcanic-black);
-            color: var(--canvas);
-            line-height: 1.6;
+            font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+            background: var(--sand-light);
+            color: var(--volcanic-black);
+            line-height: 1.7;
             overflow-x: hidden;
         }
         
         /* TYPOGRAPHY */
         .display {
-            font-family: Georgia, serif;
-            font-weight: normal;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
             letter-spacing: -0.5px;
-            line-height: 0.9;
+            line-height: 1.1;
         }
         
-        /* HERO - MINIMAL */
+        /* HERO - СВЕТЛЫЙ */
         .hero {
             height: 100vh;
             position: relative;
-            background: var(--volcanic-black);
+            background: linear-gradient(135deg, var(--sand-light) 0%, var(--sand-medium) 100%);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -53,38 +57,45 @@
         .hero-logo {
             font-size: 12vw;
             text-align: center;
-            color: var(--canvas);
+            color: var(--coffee-dark);
             position: relative;
             z-index: 2;
+            font-weight: 300;
+            letter-spacing: -2px;
         }
         
         .hero-logo span {
-            color: var(--lava-glow);
+            color: var(--volcanic-red);
+            font-weight: 400;
         }
         
         .hero-subtitle {
             text-align: center;
             font-size: 1.2rem;
-            letter-spacing: 8px;
+            letter-spacing: 6px;
             text-transform: uppercase;
-            opacity: 0.7;
+            color: var(--coffee-brown);
             margin-top: 20px;
+            opacity: 0.8;
         }
         
         .hero-scroll {
             text-align: center;
             font-size: 0.9rem;
             letter-spacing: 3px;
-            opacity: 0.5;
+            color: var(--coffee-brown);
+            opacity: 0.6;
             animation: pulse 2s infinite;
         }
         
-        /* MANIFESTO */
+        /* MANIFESTO - НА ПЕСОЧНОМ ФОНЕ */
         .manifesto {
             padding: 100px 40px;
             max-width: 800px;
             margin: 0 auto;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            background: var(--canvas);
+            border-top: 1px solid var(--sand-dark);
+            border-bottom: 1px solid var(--sand-dark);
         }
         
         .manifesto-line {
@@ -92,22 +103,28 @@
             margin-bottom: 60px;
             position: relative;
             padding-left: 40px;
+            color: var(--coffee-dark);
         }
         
         .manifesto-line::before {
             content: '•';
             position: absolute;
             left: 0;
-            color: var(--lava-glow);
+            color: var(--volcanic-red);
             font-size: 3rem;
         }
         
-        /* ZONES - FULLSCREEN */
+        /* ZONES - СВЕТЛЫЙ ФОН, ТЁМНЫЙ ТЕКСТ */
         .zone {
             min-height: 100vh;
             position: relative;
             display: flex;
             align-items: center;
+            background: var(--sand-medium);
+        }
+        
+        .zone:nth-child(even) {
+            background: var(--sand-light);
         }
         
         .zone-image {
@@ -117,8 +134,9 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.3;
+            opacity: 0.15; /* ЕЩЁ СВЕТЛЕЕ */
             z-index: 1;
+            filter: sepia(0.3) brightness(1.1); /* тёплый фильтр */
         }
         
         .zone-content {
@@ -126,56 +144,69 @@
             z-index: 2;
             padding: 80px;
             max-width: 600px;
-            background: rgba(10,10,10,0.8);
-            backdrop-filter: blur(10px);
-            border-left: 3px solid var(--lava-glow);
+            background: rgba(255, 252, 245, 0.92); /* полупрозрачный крем */
+            backdrop-filter: blur(5px);
+            border-left: 3px solid var(--volcanic-red);
+            color: var(--volcanic-black);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
         
         .zone-number {
             font-size: 1rem;
             letter-spacing: 3px;
             margin-bottom: 20px;
-            color: var(--lava-glow);
+            color: var(--volcanic-red);
+            text-transform: uppercase;
+            font-weight: 600;
         }
         
         .zone-title {
             font-size: 3rem;
             margin-bottom: 20px;
             line-height: 1;
+            color: var(--coffee-dark);
+            font-weight: 300;
         }
         
         .zone-quote {
             font-style: italic;
             margin: 30px 0;
             padding-left: 20px;
-            border-left: 1px solid rgba(255,255,255,0.3);
-            opacity: 0.8;
+            border-left: 1px solid var(--sand-dark);
+            color: var(--coffee-brown);
+            opacity: 0.9;
         }
         
-        /* PRICING - MINIMAL */
+        /* PRICING - НА СВЕТЛОМ ФОНЕ */
         .pricing {
             padding: 100px 40px;
             text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            background: var(--canvas);
+            border-top: 1px solid var(--sand-dark);
+            border-bottom: 1px solid var(--sand-dark);
         }
         
         .price-item {
             display: inline-block;
             margin: 20px;
             padding: 30px;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid var(--sand-dark);
             min-width: 200px;
             transition: all 0.3s;
+            background: white;
         }
         
         .price-item:hover {
-            border-color: var(--lava-glow);
+            border-color: var(--volcanic-red);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(181, 84, 60, 0.1);
         }
         
         .price-amount {
             font-size: 3rem;
-            color: var(--lava-glow);
+            color: var(--volcanic-red);
             margin: 10px 0;
+            font-weight: 300;
         }
         
         /* PRACTICAL */
@@ -186,34 +217,51 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            background: var(--sand-light);
         }
         
         .info-block {
             padding: 30px;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid var(--sand-dark);
+            background: white;
+            transition: all 0.3s;
+        }
+        
+        .info-block:hover {
+            border-color: var(--volcanic-red);
         }
         
         .info-block h3 {
-            color: var(--lava-glow);
+            color: var(--volcanic-red);
             margin-bottom: 20px;
             font-size: 1.2rem;
             letter-spacing: 2px;
+            text-transform: uppercase;
         }
         
         /* FOOTER */
         .footer {
             padding: 60px 40px;
             text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            opacity: 0.7;
-            font-size: 0.9rem;
+            background: var(--coffee-dark);
+            color: var(--sand-light);
+        }
+        
+        .footer-logo {
+            font-size: 2.5rem;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+        
+        .footer-logo span {
+            color: var(--volcanic-red);
         }
         
         /* ANIMATIONS */
         @keyframes pulse {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.7; }
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
         }
         
         /* RESPONSIVE */
@@ -231,8 +279,15 @@
             .zone-title {
                 font-size: 2rem;
             }
+            
+            .price-item {
+                display: block;
+                margin: 20px auto;
+                max-width: 300px;
+            }
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- HERO -->
@@ -266,7 +321,7 @@
 
     <!-- ZONE 1: STREET BAR -->
     <section class="zone">
-        <img src="your-street-bar.jpg" class="zone-image" alt="Initiation">
+        <img src="street-counter.jpg" class="zone-image" alt="Initiation">
         <div class="zone-content">
             <div class="zone-number">INITIATION</div>
             <h2 class="zone-title">Receive Your Beans</h2>
@@ -280,8 +335,8 @@
 
     <!-- ZONE 2: MUSEUM & BAR -->
     <section class="zone">
-        <img src="your-museum-bar.png" class="zone-image" alt="Education & Choice">
-        <div class="zone-content" style="margin-left: auto; border-left: none; border-right: 3px solid var(--lava-glow);">
+        <img src="museum-interior.jpg" class="zone-image" alt="Education & Choice">
+        <div class="zone-content" style="margin-left: auto; border-left: none; border-right: 3px solid var(--volcanic-red);">
             <div class="zone-number">EDUCATION & CHOICE</div>
             <h2 class="zone-title">Understand Then Choose</h2>
             <p>Walk through centuries of coffee culture in the Canary Islands. From Guanche farming tools to modern roasting techniques.</p>
@@ -294,7 +349,7 @@
 
     <!-- ZONE 3: TERRACE GALLERY -->
     <section class="zone">
-        <img src="your-terrace-gallery.png" class="zone-image" alt="Creation">
+        <img src="gallery-terrace.jpg" class="zone-image" alt="Creation">
         <div class="zone-content">
             <div class="zone-number">CREATION</div>
             <h2 class="zone-title">Brew Amidst Art</h2>
@@ -308,31 +363,31 @@
 
     <!-- PRICING -->
     <section class="pricing">
-        <h2 style="font-size: 1.5rem; letter-spacing: 3px; margin-bottom: 50px; opacity: 0.7;">
+        <h2 style="font-size: 1.5rem; letter-spacing: 3px; margin-bottom: 50px; color: var(--coffee-brown);">
             ONE PRICE · THREE ACTS
         </h2>
         
         <div class="price-item">
-            <div>Individual Ritual</div>
+            <div style="color: var(--coffee-brown);">Individual Ritual</div>
             <div class="price-amount">€10</div>
-            <div>beans included</div>
+            <div style="color: var(--coffee-dark);">beans included</div>
         </div>
         
         <div class="price-item">
-            <div>Shared Experience</div>
+            <div style="color: var(--coffee-brown);">Shared Experience</div>
             <div class="price-amount">€18</div>
-            <div>for two</div>
-            <div style="font-size: 0.8rem; color: var(--lava-glow); margin-top: 10px;">Save €2</div>
+            <div style="color: var(--coffee-dark);">for two</div>
+            <div style="font-size: 0.8rem; color: var(--volcanic-red); margin-top: 10px;">Save €2</div>
         </div>
         
         <div class="price-item">
-            <div>Group Ceremony</div>
+            <div style="color: var(--coffee-brown);">Group Ceremony</div>
             <div class="price-amount">€25</div>
-            <div>for three</div>
-            <div style="font-size: 0.8rem; color: var(--lava-glow); margin-top: 10px;">Save €5</div>
+            <div style="color: var(--coffee-dark);">for three</div>
+            <div style="font-size: 0.8rem; color: var(--volcanic-red); margin-top: 10px;">Save €5</div>
         </div>
         
-        <p style="margin-top: 60px; font-size: 0.9rem; opacity: 0.5; letter-spacing: 1px;">
+        <p style="margin-top: 60px; font-size: 0.9rem; color: var(--coffee-brown); opacity: 0.7; letter-spacing: 1px;">
             Daily 9:00–15:00 · No reservation · At the volcano's foot
         </p>
     </section>
@@ -341,35 +396,33 @@
     <section class="practical">
         <div class="info-block">
             <h3>PHILOSOPHY</h3>
-            <p>LAVA is not a café. It's a space where coffee becomes medium — for education, creation, and connection with Canarian culture and landscape.</p>
+            <p style="color: var(--coffee-dark);">LAVA is not a café. It's a space where coffee becomes medium — for education, creation, and connection with Canarian culture and landscape.</p>
         </div>
         
         <div class="info-block">
             <h3>LOGISTICS</h3>
-            <p>90-minute experience. 14 guests maximum. Walk-ins only. Last entry 14:00. Children welcome (€5 under 12).</p>
+            <p style="color: var(--coffee-dark);">90-minute experience. 14 guests maximum. Walk-ins only. Last entry 14:00. Children welcome (€5 under 12).</p>
         </div>
         
         <div class="info-block">
             <h3>LOCATION</h3>
-            <p>Calle Volcán 15, at the foot of Montana del Mojón. Between tourist centers and authentic Tenerife.</p>
+            <p style="color: var(--coffee-dark);">Calle Volcán 15, at the foot of Montana del Mojón. Between tourist centers and authentic Tenerife.</p>
         </div>
         
         <div class="info-block">
             <h3>ART PROGRAM</h3>
-            <p>Rotating exhibition of Canarian artists (public domain). Volcanic landscapes, coffee culture, island life.</p>
+            <p style="color: var(--coffee-dark);">Rotating exhibition of Canarian artists (public domain). Volcanic landscapes, coffee culture, island life.</p>
         </div>
     </section>
 
     <!-- FOOTER -->
     <footer class="footer">
-        <div style="margin-bottom: 20px; font-size: 2rem; letter-spacing: 5px;">
-            LA<span style="color: var(--lava-glow);">VA</span>
-        </div>
-        <p>
+        <div class="footer-logo">LA<span>VA</span></div>
+        <p style="opacity: 0.9;">
             Coffee Ritual at the Volcano<br>
             Study its history · Influence its outcome · Experience its context
         </p>
-        <p style="margin-top: 40px; opacity: 0.4;">
+        <p style="margin-top: 40px; opacity: 0.6; font-size: 0.9rem;">
             Tenerife · Canary Islands · 2024
         </p>
     </footer>
@@ -391,11 +444,12 @@
         function updateTime() {
             const now = new Date();
             const hour = now.getHours();
-            const isOpen = hour >= 9 && hour < 15;
-            
             const statusEl = document.querySelector('.hero-scroll');
+            
             if (statusEl && hour >= 9 && hour < 12) {
                 statusEl.innerHTML = `Open Now · Morning Rituals Available ↓`;
+                statusEl.style.color = 'var(--volcanic-red)';
+                statusEl.style.opacity = '1';
             }
         }
         
